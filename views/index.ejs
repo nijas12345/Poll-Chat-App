@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polling & Chat Application</title>
+  <link rel="stylesheet" href="/style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+</head>
+<body>
+  <div class="container"> <!-- Flex container for poll and chat -->
+    <div class="poll-section">
+      <h1>Real-Time Polling</h1>
+      <% polls.forEach((poll) => { %>
+        <div class="single-poll">
+          <div class="poll-options-row">
+            <% poll.options.forEach((option, index) => { %>
+              <div class="poll-option">
+                <div class="option-content">
+                  <img src="/images/<%= option.image %>" style="height: 150px;" alt="<%= option.name %>" width="200">
+                  <p><%= option.name %></p>
+                  <p class="vote-count" data-option-id="<%= option._id %>" data-option-index="<%= index %>">
+                    Votes: <%= option.votes %>
+                  </p>
+                </div>
+                <!-- No form! -->
+                 <%
+                const votedOptionIndex = poll.votedUsers.find(voter => voter.email === userEmail)?.optionIndex;
+                 %>
+             <button 
+              class="vote-btn" 
+              data-option-id="<%= option._id %>" 
+              data-option-index="<%= index %>" >
+              <%= votedOptionIndex === index ? 'Voted' : 'Vote' %>
+            </button>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+    <div id="loginModal" class="modal" style="display:none;">
+      
+      <div class="modal-content">
+        <span class="close-btn" id="closeLoginModal">&times;</span>
+        <h2>Login</h2>
+        <div id="errorMessage" style="color: red; display: none;"></div>
+        <form id="loginForm">
+          <input type="text" id="username" placeholder="Username"/>
+          <input type="password" id="password" placeholder="Password"/>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="chat-section"> <!-- Placeholder for chat -->
+      <div class="title Section">
+        <h1>Chat Application</h1>
+    <button id="logoutBtn" class="<%= userEmail ? '' : 'hidden' %>">
+  Logout
+</button>
+
+      </div>
+      <div class="chat-container">
+        <div class="messages" id="messages" style="height: 400px; overflow-y: auto; display: flex;"></div>
+        <div id="typingStatus" style="color: gray; font-size: 12px; display: none;"></div>
+        <div class="input-area">
+          <input type="text" id="messageInput" placeholder="Type a message..." />
+          <button id="sendButton">Send</button>
+        </div>
+      </div>  
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+</body>
+</html>
