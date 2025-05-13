@@ -10,5 +10,5 @@
     "skipLibCheck": true                      
   },
   "include": ["./**/*.ts"],
-  "files":["./Types/custom.d.ts","./Types/socket.d.ts"]
+  "files":["./types/custom.d.ts","./types/socket.d.ts"]
 }
