@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Document, Schema } from "mongoose";
 
 interface PollOption {
   name: string;
@@ -32,5 +32,5 @@ const pollSchema: Schema<IPoll> = new Schema<IPoll>({
   ],
 });
 
-const Poll = mongoose.model<IPoll>('Poll', pollSchema);
+const Poll = mongoose.model<IPoll>("Poll", pollSchema);
 export default Poll;
