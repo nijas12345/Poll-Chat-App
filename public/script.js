@@ -178,7 +178,7 @@ socket.on("voteUpdate", (data) => {
       );
       if (voteButtonElement) {
         voteButtonElement.textContent = "Voted";
-        voteButtonElement.style.background = "blue"
+        voteButtonElement.style.background = "blue"   
       }
     }
   });
