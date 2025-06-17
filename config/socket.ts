@@ -27,7 +27,7 @@ function setUpSocket(io: Server) {
         const userDoc = updatedPollData.votedUsers.find(
           (user) => user.email === userEmail
         );
-        io.emit("voteUpdate", { userDoc, updatedPollData });
+        socket.emit("voteUpdate", { userDoc, updatedPollData });
         console.log(updatedPollData);
         socket.broadcast.emit("voteEmail", { userEmail });
       } catch (error) {
@@ -54,7 +54,7 @@ function setUpSocket(io: Server) {
       const addMessage: IChat = await chatService.addMessage(
         message,
         userEmail
-      );
+      );  
       const userName = addMessage.senderEmail.split("@")[0];
       socket.emit("receiveOwnMessage", {
         message,
