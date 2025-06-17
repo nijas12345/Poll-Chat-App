@@ -177,7 +177,6 @@ socket.on("voteUpdate", (data) => {
         `.vote-btn[data-option-id="${option._id}"][data-option-index="${index}"]`
       );
       if (voteButtonElement) {
-        voteButtonElement.textContent = "Voted";
         voteButtonElement.style.background = "blue"   
       }
     }
